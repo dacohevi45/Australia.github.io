@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Australia y sus Estados</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- header -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>🇦🇺 Australia</h1>
+      <p>Descubre los 6 estados</p>
+      <a href="#estados" class="btn">Explorar estados</a>
+    </div>
+  </header>
+
+  <!-- navegación -->
+  <nav class="navbar">
+    <ul>
+      <li><a href="#mapa">Mapa</a></li>
+      <li><a href="#estados">Estados</a></li>
+      <li><a href="#tabla">Tabla</a></li>
+      <li><a href="#territorios">Territorios externos</a></li>
+    </ul>
+  </nav>
+
+  <!-- mapa interactivo -->
+  <section id="mapa" class="section">
+    <h2>Mapa interactivo</h2>
+    <p class="subtitle">Haz clic en cada estado para ver más información</p>
+    <div class="map-container">
+      <svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg" class="australia-map">
+        <!-- australia occidental -->
+        <path class="state" data-state="wa" fill="#e67e22"
+          d="M 60,180 L 200,120 L 320,150 L 340,300 L 330,450 L 200,500 L 80,470 L 40,350 Z" />
+        <!-- territorio del norte -->
+        <path class="state" data-state="nt" fill="#c0392b"
+          d="M 320,150 L 420,130 L 440,280 L 340,300 Z" />
+        <!-- australia meridonial -->
+        <path class="state" data-state="sa" fill="#16a085"
+          d="M 340,300 L 440,280 L 460,420 L 330,450 Z" />
+        <!-- queensland -->
+        <path class="state" data-state="qld" fill="#8e44ad"
+          d="M 420,130 L 580,100 L 620,280 L 500,320 L 440,280 Z" />
+        <!-- nueva gales del sur -->
+        <path class="state" data-state="nsw" fill="#2980b9"
+          d="M 500,320 L 620,280 L 640,400 L 520,430 L 460,420 L 440,280 Z" />
+        <!-- victoria -->
+        <path class="state" data-state="vic" fill="#27ae60"
+          d="M 460,420 L 520,430 L 560,480 L 500,510 L 440,490 Z" />
+        <!-- tasmania -->
+        <path class="state" data-state="tas" fill="#d35400"
+          d="M 480,570 L 540,560 L 550,630 L 490,640 Z" />
+        <!-- capital (ACT) -->
+        <circle class="state" data-state="act" fill="#f1c40f" cx="530" cy="415" r="10" />
+      </svg>
+    </div>
+    <div id="infoPanel" class="info-panel">
+      <p>Selecciona un estado en el mapa para ver detalles</p>
+    </div>
+  </section>
+
+  <!-- tarjetas de estados -->
+  <section id="estados" class="section">
+    <h2>Estados y Territorios</h2>
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Las tarjetas se generan con JS -->
+    </div>
+  </section>
+
+  <!-- tabla de resumen -->
+  <section id="tabla" class="section">
+    <h2>Tabla resumen</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Abrev.</th>
+            <th>Tipo</th>
+            <th>Capital</th>
+            <th>Área (km²)</th>
+            <th>Población</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <!-- Filas generadas con JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- territorios externos -->
+  <section id="territorios" class="section">
+    <h2>Territorios externos</h2>
+    <p>
+      Además de los 8 estados y territorios principales, Australia administra varios
+      territorios externos como el <strong>Territorio de Jervis Bay</strong>,
+      <strong>Isla Christmas</strong>, <strong>Islas Cocos (Keeling)</strong> y
+      <strong>Isla Norfolk</strong>. Estos tienen muy poca población y se destinan
+      a investigación científica, defensa o conservación natural.
+    </p>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <p>© 2026 · Página educativa sobre Australia y sus estados realizado por David Correa Herrera</p>
+  </footer>
+
+  <!--importación del archivo js-->
+  <script src="script.js"></script>
+
+</body>
+</html>
