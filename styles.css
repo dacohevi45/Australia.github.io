@@ -290,6 +290,232 @@ tbody tr:hover {
   background: #f8f9fa;
 }
 
+/* ===== WIDGETS ===== */
+.widgets-section {
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+  border-radius: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.widgets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.widget {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.widget:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.widget-wide {
+  grid-column: 1 / -1;
+}
+
+.widget h3 {
+  color: #1e3c72;
+  margin-bottom: 15px;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.widget-desc {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 12px;
+}
+
+.widget-select,
+.widget-input {
+  padding: 10px 12px;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #2c3e50;
+  outline: none;
+  transition: border-color 0.3s;
+  background: white;
+}
+
+.widget-select {
+  width: 100%;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.widget-select:focus,
+.widget-input:focus {
+  border-color: #3498db;
+}
+
+.widget-content {
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 10px;
+  min-height: 80px;
+}
+
+.loading {
+  color: #95a5a6;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Clima */
+.clima-principal {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.clima-icono {
+  font-size: 3rem;
+}
+
+.clima-temp {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+.clima-detalle {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+/* Conversor */
+.conversor {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.conversor .widget-input {
+  flex: 1;
+  min-width: 80px;
+}
+
+.conversor .widget-select {
+  flex: 1;
+  min-width: 120px;
+  margin-bottom: 0;
+}
+
+.moneda-label {
+  font-weight: 600;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.resultado-cambio {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #16a085;
+  text-align: center;
+}
+
+.tasa-info {
+  font-size: 0.8rem;
+  color: #95a5a6;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Relojes */
+.relojes-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.reloj-item {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 3px solid #3498db;
+}
+
+.reloj-ciudad {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-bottom: 4px;
+}
+
+.reloj-hora {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #1e3c72;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pronóstico */
+.pronostico-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.dia-pronostico {
+  background: #f8fafc;
+  padding: 15px 10px;
+  border-radius: 10px;
+  text-align: center;
+  border-top: 3px solid #3498db;
+  transition: transform 0.3s;
+}
+
+.dia-pronostico:hover {
+  transform: scale(1.05);
+}
+
+.dia-nombre {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.dia-icono {
+  font-size: 1.8rem;
+  margin: 5px 0;
+}
+
+.dia-temp {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1e3c72;
+}
+
+.dia-min {
+  font-size: 0.85rem;
+  color: #95a5a6;
+}
+
+@media (max-width: 600px) {
+  .relojes-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ===== FOOTER ===== */
 footer {
   background: #1e3c72;

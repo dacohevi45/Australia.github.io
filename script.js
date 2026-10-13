@@ -414,3 +414,162 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       .scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+// ============================================
+// ===== WIDGETS =====
+// ============================================
+
+// ----- WIDGET 1: CLIMA (Open-Meteo, sin API key) -----
+const coordenadas = {
+  Sydney:   { lat: -33.8688, lon: 151.2093 },
+  Melbourne:{ lat: -37.8136, lon: 144.9631 },
+  Brisbane: { lat: -27.4698, lon: 153.0251 },
+  Perth:    { lat: -31.9505, lon: 115.8605 },
+  Adelaide: { lat: -34.9285, lon: 138.6007 },
+  Hobart:   { lat: -42.8821, lon: 147.3272 }
+};
+
+// Códigos de clima WMO → emoji + descripción
+function codigoClima(code) {
+  const mapa = {
+    0:  { icono: '☀️', texto: 'Despejado' },
+    1:  { icono: '🌤️', texto: 'Mayormente despejado' },
+    2:  { icono: '⛅', texto: 'Parcialmente nublado' },
+    3:  { icono: '☁️', texto: 'Nublado' },
+    45: { icono: '🌫️', texto: 'Niebla' },
+    48: { icono: '🌫️', texto: 'Niebla helada' },
+    51: { icono: '🌦️', texto: 'Llovizna ligera' },
+    61: { icono: '🌧️', texto: 'Lluvia ligera' },
+    63: { icono: '🌧️', texto: 'Lluvia moderada' },
+    65: { icono: '🌧️', texto: 'Lluvia fuerte' },
+    71: { icono: '🌨️', texto: 'Nieve ligera' },
+    80: { icono: '🌦️', texto: 'Chubascos' },
+    95: { icono: '⛈️', texto: 'Tormenta' }
+  };
+  return mapa[code] || { icono: '🌡️', texto: 'Desconocido' };
+}
+
+async function cargarClima(ciudad) {
+  const resultado = document.getElementById('climaResultado');
+  resultado.innerHTML = '<p class="loading">Cargando clima...</p>';
+
+  const { lat, lon } = coordenadas[ciudad];
+  try {
+    const res = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,relative_humidity_2m&timezone=Australia%2FSydney`
+    );
+    const data = await res.json();
+    const c = data.current;
+    const clima = codigoClima(c.weather_code);
+
+    resultado.innerHTML = `
+      <div class="clima-principal">
+        <span class="clima-icono">${clima.icono}</span>
+        <div>
+          <div class="clima-temp">${Math.round(c.temperature_2m)}°C</div>
+          <div class="clima-detalle">${clima.texto}</div>
+        </div>
+      </div>
+      <div class="clima-detalle">
+        💧 Humedad: ${c.relative_humidity_2m}% · 
+        🌬️ Viento: ${Math.round(c.wind_speed_10m)} km/h
+      </div>
+    `;
+  } catch (err) {
+    resultado.innerHTML = '<p class="loading">⚠️ No se pudo cargar el clima</p>';
+  }
+}
+
+document.getElementById('ciudadClima').addEventListener('change', (e) => {
+  cargarClima(e.target.value);
+  cargarPronostico(e.target.value);
+  document.getElementById('ciudadPronostico').textContent = 
+    e.target.options[e.target.selectedIndex].text;
+});
+cargarClima('Sydney');
+
+// ----- WIDGET 2: TIPO DE CAMBIO (ExchangeRate API, sin key) -----
+async function cargarCambio() {
+  const monto = parseFloat(document.getElementById('montoAUD').value) || 0;
+  const destino = document.getElementById('monedaDestino').value;
+  const resultado = document.getElementById('cambioResultado');
+  resultado.innerHTML = '<p class="loading">Convirtiendo...</p>';
+
+  try {
+    const res = await fetch('https://open.er-api.com/v6/latest/AUD');
+    const data = await res.json();
+    const tasa = data.rates[destino];
+    const convertido = (monto * tasa).toFixed(2);
+
+    resultado.innerHTML = `
+      <div class="resultado-cambio">${monto} AUD = ${convertido} ${destino}</div>
+      <div class="tasa-info">1 AUD = ${tasa.toFixed(4)} ${destino}</div>
+    `;
+  } catch (err) {
+    resultado.innerHTML = '<p class="loading">⚠️ No se pudo cargar la tasa</p>';
+  }
+}
+
+document.getElementById('montoAUD').addEventListener('input', cargarCambio);
+document.getElementById('monedaDestino').addEventListener('change', cargarCambio);
+cargarCambio();
+
+// ----- WIDGET 3: RELOJES AUSTRALIA -----
+const zonasHorarias = [
+  { ciudad: 'Sídney',    tz: 'Australia/Sydney' },
+  { ciudad: 'Melbourne', tz: 'Australia/Melbourne' },
+  { ciudad: 'Brisbane',  tz: 'Australia/Brisbane' },
+  { ciudad: 'Perth',     tz: 'Australia/Perth' },
+  { ciudad: 'Adelaida',  tz: 'Australia/Adelaide' },
+  { ciudad: 'Darwin',    tz: 'Australia/Darwin' }
+];
+
+function actualizarRelojes() {
+  const cont = document.getElementById('relojes');
+  cont.innerHTML = zonasHorarias.map(z => {
+    const hora = new Date().toLocaleTimeString('es-ES', {
+      timeZone: z.tz,
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    return `
+      <div class="reloj-item">
+        <div class="reloj-ciudad">${z.ciudad}</div>
+        <div class="reloj-hora">${hora}</div>
+      </div>
+    `;
+  }).join('');
+}
+actualizarRelojes();
+setInterval(actualizarRelojes, 1000);
+
+// ----- WIDGET 4: PRONÓSTICO 5 DÍAS -----
+async function cargarPronostico(ciudad) {
+  const cont = document.getElementById('pronostico');
+  cont.innerHTML = '<p class="loading">Cargando pronóstico...</p>';
+
+  const { lat, lon } = coordenadas[ciudad];
+  try {
+    const res = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Australia%2FSydney&forecast_days=5`
+    );
+    const data = await res.json();
+    const daily = data.daily;
+
+    cont.innerHTML = daily.time.map((fecha, i) => {
+      const clima = codigoClima(daily.weather_code[i]);
+      const dia = new Date(fecha).toLocaleDateString('es-ES', { weekday: 'short' });
+      return `
+        <div class="dia-pronostico">
+          <div class="dia-nombre">${dia}</div>
+          <div class="dia-icono">${clima.icono}</div>
+          <div class="dia-temp">${Math.round(daily.temperature_2m_max[i])}°</div>
+          <div class="dia-min">${Math.round(daily.temperature_2m_min[i])}°</div>
+        </div>
+      `;
+    }).join('');
+  } catch (err) {
+    cont.innerHTML = '<p class="loading">⚠️ No se pudo cargar el pronóstico</p>';
+  }
+}
+cargarPronostico('Sydney');

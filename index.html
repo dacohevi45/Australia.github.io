@@ -64,6 +64,67 @@
     </p>
   </section>
 
+    <!-- ===== WIDGETS ===== -->
+  <section id="widgets" class="section widgets-section">
+    <h2>🧩 Widgets útiles</h2>
+    <p class="subtitle">Información en vivo para tu viaje a Australia</p>
+
+    <div class="widgets-grid">
+
+      <!-- WIDGET 1: CLIMA -->
+      <div class="widget">
+        <h3>🌤️ Clima en capitales</h3>
+        <select id="ciudadClima" class="widget-select">
+          <option value="Sydney">Sídney</option>
+          <option value="Melbourne">Melbourne</option>
+          <option value="Brisbane">Brisbane</option>
+          <option value="Perth">Perth</option>
+          <option value="Adelaide">Adelaida</option>
+          <option value="Hobart">Hobart</option>
+        </select>
+        <div id="climaResultado" class="widget-content">
+          <p class="loading">Cargando clima...</p>
+        </div>
+      </div>
+
+      <!-- WIDGET 2: TIPO DE CAMBIO -->
+      <div class="widget">
+        <h3>💱 Tipo de cambio</h3>
+        <p class="widget-desc">Convierte desde dólares australianos (AUD)</p>
+        <div class="conversor">
+          <input type="number" id="montoAUD" value="100" min="1" class="widget-input">
+          <span class="moneda-label">AUD →</span>
+          <select id="monedaDestino" class="widget-select">
+            <option value="USD">🇺🇸 USD</option>
+            <option value="EUR">🇪🇺 EUR</option>
+            <option value="MXN">🇲🇽 MXN</option>
+            <option value="COP">🇨🇴 COP</option>
+            <option value="ARS">🇦🇷 ARS</option>
+            <option value="GBP">🇬🇧 GBP</option>
+          </select>
+        </div>
+        <div id="cambioResultado" class="widget-content">
+          <p class="loading">Cargando tasa...</p>
+        </div>
+      </div>
+
+      <!-- WIDGET 3: RELOJ AUSTRALIA -->
+      <div class="widget">
+        <h3>🕐 Hora en Australia</h3>
+        <div id="relojes" class="relojes-container"></div>
+      </div>
+
+      <!-- WIDGET 4: PRONÓSTICO 5 DÍAS -->
+      <div class="widget widget-wide">
+        <h3>📅 Pronóstico 5 días - <span id="ciudadPronostico">Sídney</span></h3>
+        <div id="pronostico" class="pronostico-grid">
+          <p class="loading">Cargando pronóstico...</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <p>© 2025 · Página educativa sobre Australia</p>
