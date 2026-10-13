@@ -14,37 +14,60 @@ body {
 
 /* ===== HERO ===== */
 .hero {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 60, 114, 0.65) 0%, rgba(42, 82, 152, 0.75) 100%),
+              url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1600&q=80') center/cover no-repeat;
   color: white;
   text-align: center;
-  padding: 100px 20px;
+  padding: 120px 20px;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero h1 {
   font-size: 3.5rem;
   margin-bottom: 15px;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
 }
 
 .hero p {
   font-size: 1.3rem;
   margin-bottom: 30px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
+/* BOTÓN */
 .btn {
   display: inline-block;
   background: #f39c12;
   color: white;
-  padding: 12px 30px;
+  padding: 14px 35px;
   border-radius: 30px;
   text-decoration: none;
   font-weight: bold;
-  transition: transform 0.3s, background 0.3s;
+  font-size: 1rem;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+}
+
+.btn,
+.btn:visited,
+.btn:link {
+  color: white;
 }
 
 .btn:hover {
   background: #e67e22;
   transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(230, 126, 34, 0.5);
 }
 
 /* ===== NAVBAR ===== */
@@ -53,7 +76,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .navbar ul {
@@ -510,12 +533,6 @@ tbody tr:hover {
   color: #95a5a6;
 }
 
-@media (max-width: 600px) {
-  .relojes-container {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ===== FOOTER ===== */
 footer {
   background: #1e3c72;
@@ -533,4 +550,5 @@ footer {
   .navbar a { padding: 12px 15px; font-size: 0.9rem; }
   .estado-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .estado-meta { flex-wrap: wrap; }
+  .relojes-container { grid-template-columns: 1fr; }
 }
