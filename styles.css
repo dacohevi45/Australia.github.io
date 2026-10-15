@@ -101,6 +101,7 @@ body {
 
 /* ===== SECCIONES ===== */
 .section {
+  scroll-margin-top: 60px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 20px;
@@ -540,6 +541,22 @@ footer {
   text-align: center;
   padding: 30px 20px;
   margin-top: 40px;
+}
+
+.footer-creditos {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+footer a {
+  color: #f5b041;
+}
+
+/* Foco visible al navegar con teclado */
+.estado-header:focus-visible {
+  outline: 3px solid #f39c12;
+  outline-offset: -3px;
 }
 
 /* ===== RESPONSIVE ===== */
